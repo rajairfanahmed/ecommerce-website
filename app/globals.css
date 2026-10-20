@@ -1,26 +1,129 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Fonts */
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
 
-@theme inline {
+  /* Spacing */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-30: 7.5rem;
+
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-surface-100: oklch(var(--surface-100));
+  --color-surface-200: oklch(var(--surface-200));
+  --color-surface-300: oklch(var(--surface-300));
+
+  --color-brand-primary: oklch(var(--accent-primary));
+  --color-brand-secondary: oklch(var(--accent-secondary));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Surface Colors - Deep Obsidian to Void */
+  --surface-100: 0% 0 0;
+  /* Pure Black */
+  --surface-200: 15% 0.01 280;
+  /* Deepest Purple-Black */
+  --surface-300: 20% 0.02 280;
+  --surface-glass: 15% 0.01 280 / 80%;
+
+  /* Text Colors */
+  --text-primary: 98% 0.005 280;
+  /* Off-White */
+  --text-secondary: 70% 0.01 280;
+  /* Muted Grey */
+  --text-tertiary: 50% 0.01 280;
+
+  /* Accent Colors - Velvet Thunder */
+  --accent-primary: 65% 0.22 290;
+  /* Electric Lavender */
+  --accent-secondary: 85% 0.2 140;
+  /* Hyper-Lime */
+  --accent-glow: 65% 0.22 290 / 40%;
+
+  /* Functional */
+  --success: 70% 0.15 150;
+  --error: 60% 0.2 25;
+  --border: 30% 0.01 280;
+
+  /* Typography Scale (Fluid) */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* Lenis Recommended Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: oklch(var(--surface-100));
+  color: oklch(var(--text-primary));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: oklch(var(--accent-primary));
+  color: oklch(var(--surface-100));
+}
+
+/* Aesthetic Utilities */
+.glass-panel {
+  background: oklch(var(--surface-200) / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(var(--border));
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, oklch(var(--text-primary)) 0%, oklch(var(--text-secondary)) 100%);
+}
+
+.text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, oklch(var(--accent-primary)) 0%, oklch(var(--accent-secondary)) 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(var(--surface-100));
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--surface-300));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--accent-primary));
 }
